@@ -1,6 +1,7 @@
-# DSH runtime, server-side deps (restore via installer / pnpm)
+# DSH runtime, server-side deps, pnpm-managed installs (restore via installer / pnpm)
 runtime/
 profiles/node_modules/
+profiles/web/node_modules/
 
 # Personal state, credentials, machine-specific settings
 sessions/
