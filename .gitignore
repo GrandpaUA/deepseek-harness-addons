@@ -1,0 +1,14 @@
+# DSH runtime, server-side deps (restore via installer / pnpm)
+runtime/
+profiles/node_modules/
+
+# Personal state, credentials, machine-specific settings
+sessions/
+storages/
+.credentials.yaml
+settings.yaml
+
+# Junk
+*.log
+.DS_Store
+Thumbs.db
