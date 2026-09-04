@@ -2,6 +2,7 @@
 runtime/
 profiles/node_modules/
 profiles/web/node_modules/
+profiles/web/.dsh-market/
 
 # Personal state, credentials, machine-specific settings
 sessions/
