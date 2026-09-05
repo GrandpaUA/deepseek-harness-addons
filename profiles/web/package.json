@@ -5,6 +5,8 @@
     "@dennisrongo/dsh-memory": "^0.1.2",
     "@dsh-external/dsh-sidechain": "git+https://github.com/Buyi-wsgzg/dsh-sidechain.git",
     "@local/dsh-locale-uk": "workspace:*",
+    "dsh-checkpoint-diff": "^0.5.2",
+    "dsh-checkpoint-rewind": "^0.6.4",
     "dsh-recall": "^0.3.0",
     "dsh-session-fork": "^0.2.0",
     "dsh-thinking-language": "github:qingmomo233/dsh-thinking-language",
@@ -12,10 +14,10 @@
   },
   "pnpm": {
     "overrides": {
-      "@deepseek-ai/dsh-tools": "link:../../node_modules/@deepseek-ai/dsh-tools",
-      "@deepseek-ai/dsh-settings": "link:../../node_modules/@deepseek-ai/dsh-settings",
-      "@deepseek-ai/schemastery": "link:../../node_modules/@deepseek-ai/schemastery",
-      "@deepseek-ai/cosmokit": "link:../../node_modules/@deepseek-ai/cosmokit"
+      "@deepseek-ai/dsh-tools": "link:../../runtime/node_modules/@deepseek-ai/dsh-tools",
+      "@deepseek-ai/dsh-settings": "link:../../runtime/node_modules/@deepseek-ai/dsh-settings",
+      "@deepseek-ai/schemastery": "link:../../runtime/node_modules/@deepseek-ai/schemastery",
+      "@deepseek-ai/cosmokit": "link:../../runtime/node_modules/@deepseek-ai/cosmokit"
     }
   },
   "dsh": {
@@ -28,7 +30,9 @@
         "@dsh-external/dsh-sidechain",
         "dsh-recall",
         "dsh-session-fork",
-        "dsh-thinking-language"
+        "dsh-thinking-language",
+        "dsh-checkpoint-diff",
+        "dsh-checkpoint-rewind"
       ]
     }
   }

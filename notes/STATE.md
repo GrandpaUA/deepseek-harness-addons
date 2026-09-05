@@ -2,7 +2,7 @@
 
 ## Інсталяція
 - DSH_HOME = `C:\All\Project\Vibecode\DeepSeek Harness`
-- Сервер: `dsh-web.cmd` → http://127.0.0.1:3080 (зараз PID 10864, старт 02:00, усі плагіни наживо)
+- Сервер: `dsh-web.cmd` → http://127.0.0.1:3080 (PID 30368, старт 09:35, усі плагіни наживо)
 - Репо: локальний git у DSH_HOME + GitHub `GrandpaUA/deepseek-harness-addons` (public), гілка main
 
 ## Виконано
@@ -15,10 +15,10 @@
    - dsh-recall — пошук по сесіях
    - @dennisrongo/dsh-memory — /remember в ієрархію інструкцій
    - github:Buyi-wsgzg/dsh-sidechain — /side /btw
-   - Усі 6 + locale-uk підтверджені в --dump-config і boot-маніфесті.
+   - dsh-checkpoint-rewind + dsh-checkpoint-diff — знімки змін, /diff /rollback (пояснено, поставлено)
+   - Усі 8 + locale-uk підтверджені в --dump-config і boot-маніфесті.
 
 ## Черга завдань
-- [ ] Пояснити і поставити dsh-checkpoint-diff (/diff /rollback)
 - [ ] Пояснити і поставити ultra-slash (/steer /new /skill /docs)
 - [ ] Організація репо для наших майбутніх патчів
 - Коміт: git add -A; commit; push (push stderr у pwsh = нормально, дивитись на `main -> main`)
