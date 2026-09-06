@@ -5,6 +5,7 @@
     "@dennisrongo/dsh-memory": "^0.1.2",
     "@dsh-external/dsh-sidechain": "git+https://github.com/Buyi-wsgzg/dsh-sidechain.git",
     "@local/dsh-locale-uk": "workspace:*",
+    "deepseek-harness-ultra-slash": "0.2.2",
     "dsh-checkpoint-diff": "^0.5.2",
     "dsh-checkpoint-rewind": "^0.6.4",
     "dsh-recall": "^0.3.0",
@@ -32,7 +33,8 @@
         "dsh-session-fork",
         "dsh-thinking-language",
         "dsh-checkpoint-diff",
-        "dsh-checkpoint-rewind"
+        "dsh-checkpoint-rewind",
+        "deepseek-harness-ultra-slash"
       ]
     }
   }

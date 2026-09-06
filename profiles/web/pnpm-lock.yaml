@@ -16,7 +16,10 @@ importers:
         version: git+https://github.com/Buyi-wsgzg/dsh-sidechain.git#deca4cf874c38d322448b798a87aafb2ae0b3f30(@deepseek-ai/dsh-tools@0.1.0-rc.8)
       '@local/dsh-locale-uk':
         specifier: workspace:*
-        version: link:local/dsh-locale-uk
+        version: link:../../plugins/dsh-locale-uk
+      deepseek-harness-ultra-slash:
+        specifier: 0.2.2
+        version: 0.2.2
       dsh-checkpoint-diff:
         specifier: ^0.5.2
         version: 0.5.2
@@ -36,7 +39,7 @@ importers:
         specifier: ^1.41.0
         version: 1.41.0(@deepseek-ai/dsh-settings@0.1.0-rc.8(@deepseek-ai/schemastery@3.18.2))(@deepseek-ai/schemastery@3.18.2)
 
-  local/dsh-locale-uk: {}
+  ../../plugins/dsh-locale-uk: {}
 
 packages:
 
@@ -94,6 +97,16 @@ packages:
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+
+  deepseek-harness-ultra-slash@0.2.2:
+    resolution: {integrity: sha512-51HER0C7qeZ2IvulHNkQPkWK9HWqcexqDZyvqBs3DzbmOx976t3ZfN6wxOxX+3BmGXuo5RYEENk0scGNR07aqw==}
+    engines: {node: ^22.19.0 || >=24.0.0}
+    peerDependencies:
+      '@deepseek-ai/cordis': '>=0.1.0-rc.5'
+      react: ^18.2.0
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   dsh-checkpoint-diff@0.5.2:
     resolution: {integrity: sha512-SzOGRssxTdBITWuRJIEivWNWTJqtKxU4kFg5/xXyd17L5Dc4wuJR4V0TuPyevHSSACbWxIvLMxOkiYkgwDLhZg==}
@@ -222,6 +235,8 @@ snapshots:
   '@standard-schema/spec@1.1.0': {}
 
   argparse@2.0.1: {}
+
+  deepseek-harness-ultra-slash@0.2.2: {}
 
   dsh-checkpoint-diff@0.5.2:
     dependencies:

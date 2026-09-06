@@ -3,6 +3,7 @@ runtime/
 profiles/node_modules/
 profiles/web/node_modules/
 profiles/web/.dsh-market/
+ultra-slash/
 
 # Personal state, credentials, machine-specific settings
 sessions/
