@@ -2,7 +2,7 @@
 
 ## Інсталяція
 - DSH_HOME = `C:\All\Project\Vibecode\DeepSeek Harness`
-- Сервер: `dsh-web.cmd` → http://127.0.0.1:3080 (PID 30368, старт 09:35, усі плагіни наживо)
+- Сервер: `dsh-web.cmd` → http://127.0.0.1:3080 (PID 24312, старт 14:43 після safe-restart, усі плагіни наживо)
 - Репо: локальний git у DSH_HOME + GitHub `GrandpaUA/deepseek-harness-addons` (public), гілка main
 
 ## Виконано
@@ -21,14 +21,15 @@
 ## Черга завдань
 - [ ] Пояснити і поставити ultra-slash (/steer /new /skill /docs) — юзеру пояснено, чекає рішення
 - [ ] Організація репо для наших майбутніх патчів
-- [ ] Бойовий тест safe-restart (перерве сесію на лічені секунди — за командою юзера)
 
-## Безпечний дев-цикл (проти дропу сесії)
+## Безпечний дев-цикл (проти дропу сесії) — ГОТОВО, бойовий тест SUCCESS
 - Зміни конфігів/плагінів НЕ впливають на запущений сервер (композиція фіксується на boot)
-- `scripts/dev-canary.ps1` — перевірка нової конфігурації на порті 3099, основний сервер (3080) не чіпається; тест пройдено (CANARY PASS)
-- `scripts/safe-restart.ps1` — переключення: git clean → канарка → kill 3080 → старт → health-check → авто-відкат `git checkout -- .` якщо не стартує; лог у `notes/last-restart.log`; запускати відокремлено: `Start-Process powershell -ArgumentList '-NoProfile','-File','scripts\safe-restart.ps1' -WorkingDirectory <DSH_HOME> -WindowStyle Hidden`
-- Сесії персистують на диску (sessions/, storages/) — після рестарту GUI відновлює сесію
-- УВАГА: тулзи працюють у Windows PowerShell 5.1 (не pwsh 7); скрипти з BOM
+- `scripts/dev-canary.ps1` — перевірка нової конфігурації на порті 3099, основний сервер (3080) не чіпається
+- `scripts/safe-restart.ps1` — переключення: git clean → канарка → kill 3080 → старт → health-check → авто-відкат `git checkout -- .`; лог у `notes/last-restart.log`; **бойовий тест 14:43: SUCCESS, ~17 с, сесія вижила**
+- Запуск safe-restart ТІЛЬКИ через WMI (Start-Process із тул-виклика вбивається по завершенні виклику):
+  `Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{CommandLine='powershell.exe -NoProfile -ExecutionPolicy Bypass -File "<DSH_HOME>\scripts\safe-restart.ps1"'; CurrentDirectory='<DSH_HOME>'}`
+- Сесії персистують на диску (sessions/, storages/) — після рестарту GUI відновлює сесію (F5)
+- УВАГА: тулзи працюють у Windows PowerShell 5.1 (не pwsh 7); скрипти з BOM; в інлайн-командах не вживати «’» (парсер ламається) — тільки ASCII
 - Коміт: git add -A; commit; push (push stderr у pwsh = нормально, дивитись на `main -> main`)
 
 ## Нюанси

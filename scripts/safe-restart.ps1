@@ -2,8 +2,11 @@
 # Гарантії: (1) канарка перевіряє старт ДО вбивства основного сервера; (2) якщо новий сервер
 # не піднімається — авто-відкат конфігів через git і старт старої версії; (3) скрипт жити
 # окремим процесом, тож смерть сервера його не зупиняє.
-# Використання (з сесії, відокремлено):
-#   Start-Process powershell -ArgumentList '-NoProfile','-File','scripts\safe-restart.ps1' -WorkingDirectory <DSH_HOME> -WindowStyle Hidden
+# Використання (з сесії — ВАЖЛИВО: запускати через WMI, бо Start-Process із тул-виклика
+# вбивається разом із завершенням виклику):
+#   Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{
+#     CommandLine = 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File "<DSH_HOME>\scripts\safe-restart.ps1"';
+#     CurrentDirectory = '<DSH_HOME>' }
 # Результат завжди пишеться в notes\last-restart.log
 param(
     [int]$Port = 3080,
@@ -45,7 +48,8 @@ if ($dirty) { Log 'ABORT: git не чистий — закоміть зміни,
 # 2) канарка
 if (-not $SkipCanary) {
     Log '[1/4] канарка...'
-    & powershell -NoProfile -File (Join-Path $PSScriptRoot 'dev-canary.ps1') *>> $logFile
+    $canaryOut = & powershell -NoProfile -File (Join-Path $PSScriptRoot 'dev-canary.ps1') 2>&1 | Out-String
+    Add-Content $logFile $canaryOut
     if ($LASTEXITCODE -ne 0) { Log 'ABORT: канарка не пройшла — основний сервер НЕ чіпався, сесія жива'; exit 1 }
     Log 'канарка PASS'
 }
@@ -64,7 +68,8 @@ if (HealthOk -P $Port -Wait $TimeoutSec) {
 }
 Log 'НОВИЙ СЕРВЕР НЕ ПІДНЯВСЯ — відкатую конфіги (git checkout) і стартую стару версію'
 if (-not $newProc.HasExited) { Stop-Process -Id $newProc.Id -Force -ErrorAction SilentlyContinue; Start-Sleep 1 }
-git -C $dshHome checkout -- . *>> $logFile
+$gitOut = git -C $dshHome checkout -- . 2>&1 | Out-String
+Add-Content $logFile $gitOut
 $rollback = StartServer
 if (HealthOk -P $Port -Wait $TimeoutSec) {
     Log "ВІДКАТ OK: стара конфігурація наживо на $Port (PID $($rollback.Id))"
