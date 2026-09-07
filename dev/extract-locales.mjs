@@ -4,7 +4,8 @@
 import { readFileSync, readdirSync, writeFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
-const ROOT = "C:\\All\\Project\\Vibecode\\DeepSeek Harness\\runtime\\node_modules\\@deepseek-ai";
+const DSH_HOME = process.env.DSH_HOME || "C:\\All\\Project\\Vibecode\\DeepSeek Harness";
+const ROOT = join(DSH_HOME, "runtime", "node_modules", "@deepseek-ai");
 
 // Extract balanced {...} or [...] starting at index of the opening bracket.
 function extractBalanced(text, start) {

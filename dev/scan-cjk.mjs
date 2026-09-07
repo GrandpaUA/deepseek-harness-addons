@@ -1,10 +1,13 @@
 // Cross-check: find every CJK string literal in the @deepseek-ai client packages
 // and report the ones that are NOT zh dictionary values covered by locales-extracted.json.
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = "C:\\All\\Project\\Vibecode\\DeepSeek Harness\\runtime\\node_modules\\@deepseek-ai";
-const extracted = JSON.parse(readFileSync("C:\\All\\Project\\Vibecode\\DeepSeek Harness\\notes\\locales-extracted.json", "utf8"));
+const here = dirname(fileURLToPath(import.meta.url));
+const DSH_HOME = process.env.DSH_HOME || "C:\\All\\Project\\Vibecode\\DeepSeek Harness";
+const root = join(DSH_HOME, "runtime", "node_modules", "@deepseek-ai");
+const extracted = JSON.parse(readFileSync(join(here, "locales-extracted.json"), "utf8"));
 
 // Set of all zh values (and en values) in the extracted dictionaries.
 const zhValues = new Set();

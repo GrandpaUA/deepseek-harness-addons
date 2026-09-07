@@ -1,10 +1,12 @@
 // Merge uk translation parts, validate against extracted zh key sets,
 // and build the @local/dsh-locale-uk client plugin package.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const NOTES = "C:\\All\\Project\\Vibecode\\DeepSeek Harness\\notes";
-const PKG_DIR = "C:\\All\\Project\\Vibecode\\DeepSeek Harness\\profiles\\web\\node_modules\\@local\\dsh-locale-uk";
+const here = dirname(fileURLToPath(import.meta.url));
+const NOTES = here;                       // dev/ — uk parts and locales-extracted.json
+const PKG_DIR = join(here, "..");         // repo root = the @local/dsh-locale-uk package
 
 const extracted = JSON.parse(readFileSync(join(NOTES, "locales-extracted.json"), "utf8"));
 const uk = {};

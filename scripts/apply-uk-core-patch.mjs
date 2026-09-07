@@ -1,16 +1,16 @@
 // Adds the "uk" locale to @deepseek-ai/dsh-client-locale so the settings schema
 // and the language picker accept Ukrainian. Idempotent: safe to run repeatedly.
 //
-// Usage:  node scripts/apply-uk-core-patch.mjs   (from the DSH home directory)
+// Usage:  node scripts/apply-uk-core-patch.mjs   (run from the DSH home directory,
+//         or set DSH_HOME to point at it)
 //
 // Note: DSH ships only zh/en. The translation dictionaries themselves come from
-// the client plugin profiles/web/node_modules/@local/dsh-locale-uk, which is
-// wired in through profiles/web/cordis.patch.yml.
+// this package's client.js, which is wired in through profiles/web/cordis.patch.yml.
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const root = process.env.DSH_HOME || process.cwd();
 const pkgDir = join(root, "runtime", "node_modules", "@deepseek-ai", "dsh-client-locale", "lib");
 
 function patch(file, replacements) {

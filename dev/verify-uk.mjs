@@ -8,7 +8,7 @@ import { dirname, join } from "node:path";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const extractedPath = join(here, "locales-extracted.json");
-const pluginPath = join(here, "..", "profiles", "web", "node_modules", "@local", "dsh-locale-uk", "client.js");
+const pluginPath = join(here, "..", "client.js");
 
 const extracted = JSON.parse(readFileSync(extractedPath, "utf8"));
 

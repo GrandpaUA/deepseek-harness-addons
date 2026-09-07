@@ -1,17 +1,3 @@
-# DSH runtime, server-side deps, pnpm-managed installs (restore via installer / pnpm)
-runtime/
-profiles/node_modules/
-profiles/web/node_modules/
-profiles/web/.dsh-market/
-ultra-slash/
-
-# Personal state, credentials, machine-specific settings
-sessions/
-storages/
-.credentials.yaml
-settings.yaml
-
-# Junk
 *.log
 .DS_Store
 Thumbs.db

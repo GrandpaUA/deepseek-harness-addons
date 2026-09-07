@@ -1,3 +1,0 @@
-& "C:\All\Project\Vibecode\DeepSeek Harness\dsh-web.cmd"
-
-"C:\All\Project\Vibecode\DeepSeek Harness\dsh-web.cmd"

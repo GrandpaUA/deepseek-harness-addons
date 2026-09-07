@@ -1,10 +1,13 @@
 // Compare dictionary values vs ALL CJK string literals per client bundle,
 // to estimate how much UI copy sits outside the locale registry.
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = "C:\\All\\Project\\Vibecode\\DeepSeek Harness\\runtime\\node_modules\\@deepseek-ai";
-const extracted = JSON.parse(readFileSync("C:\\All\\Project\\Vibecode\\DeepSeek Harness\\notes\\locales-extracted.json", "utf8"));
+const here = dirname(fileURLToPath(import.meta.url));
+const DSH_HOME = process.env.DSH_HOME || "C:\\All\\Project\\Vibecode\\DeepSeek Harness";
+const ROOT = join(DSH_HOME, "runtime", "node_modules", "@deepseek-ai");
+const extracted = JSON.parse(readFileSync(join(here, "locales-extracted.json"), "utf8"));
 
 const dictValues = new Set();
 for (const locs of Object.values(extracted)) {
